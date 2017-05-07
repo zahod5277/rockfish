@@ -26,8 +26,9 @@
     </div>
     {ignore}
     <script>
-    $('.getpic').on("click", function() {
-    var image = 'none';
+    $('body').on('click', '.getpic', function() {
+    var image = 'none',
+        tags = '';
     //some shit code
     $(this).siblings('input.parser-img').addClass('this');
     //end of shit code
@@ -37,18 +38,35 @@
         apiSecret: 'bff41bd32113fd06b5883d5d44c99b5d'
     });
     lastfm.artist.getInfo({
-        artist: name
+        artist: name,
+        autocorrect: 1,
+        lang: 'ru'
     }, {
         success: function(data) {
             image = findUrl(data.artist.image, "extralarge");
+            tags = data.artist.tags;
+            for (var i = 0; i < tags.tag.length; i++) {
+                var genre = '<i class="tag">'+tags.tag[i].name+'</i>';
+                $('.this').parents('.gig-parser-row').find('.genre-tags').append(genre);
+            }
             $('.this').val(image);
             $('.this').siblings('p').find('.pic_url').attr('href', image);
             $('.this').siblings('p').find('.pic_url').show("fast");
+            $('.this').parents('.gig-parser-row').find('.bio').text(data.artist.bio.content);
             $('.this').removeClass('this');
         },
         error: function(code, message) {}
     });
+});
 
+$('body').on('click','.tag', function(){
+    var genre = $(this).parents('.parser-row').find('.genre'),
+        val = $(this).html();
+    if ($(genre).val()===''){
+        $(genre).val(val);
+    } else {
+        $(genre).val($(genre).val()+', '+val);
+    }
 });
 
 function findUrl(image, size) {
@@ -76,8 +94,10 @@ $('.save').on("click", function() {
         date: $(parent).find('.date').val(),
         price: $(parent).find('.gig-price').val(),
         img: $(parent).find('.parser-img').val(),
+        content: $(parent).find('.bio').text(),
         club: '[[*club]]',
-        clubname: '[[#[[*club]].pagetitle]]'
+        clubname: '[[#[[*club]].pagetitle]]',
+        genre: $(parent).find('.genre').val()
     };
     gig = JSON.stringify(gig);
     // Берем действие из атрибута data-action ссылки

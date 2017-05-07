@@ -4,6 +4,10 @@
     </div>
     <div class="col-xs-3 parser-row">
         <input type="text" name="name[{$idx}]" class="form-control artist-name" value="{$title}">
+        <input type="text" name="tag[{$idx}]" class="form-control genre" placeholder="Жанры">
+        <textarea name="bio[{$idx}]" id="bio[{$idx}]" class="bio hidden"></textarea>
+        <p class="genre-tags">
+        </p>
     </div>
     <div class="col-xs-3">
         <input type="text" name="img[{$idx}]" placeholder="Нажми сюда ->" class="form-control parser-img" value="">

@@ -9,8 +9,11 @@
     </div>
     <div class="col-xs-12 col-lg-8 offset-lg-1 event-info">
         <h3>
-            <a href="{$_modx->makeUrl($id)}" title="{$pagetitle}">{$pagetitle}</a>
+            <a href="{$id|url}" title="{$pagetitle}">
+                {$pagetitle}
+            </a>
         </h3>
+        <h6 class="gig-genre">{$_pls['tv.genre']}</h6>
         <p>Где: <strong><a href="{$_modx->makeUrl($id|resource:"parent")}" title="концерт {$pagetitle} в спб">{$_pls['tv.club']}</a></strong></p>
         <p>Когда: <strong>{$publishedon|date_format:"%d/%m/%Y"}</strong></p>
         <p>Сколько: <strong>{$_pls['tv.price']}</strong></p>

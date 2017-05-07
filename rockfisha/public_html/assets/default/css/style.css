@@ -131,3 +131,38 @@ box-shadow: 0px 5px 7px 0px rgba(0,0,0,0.35);
 .category-row a:hover{
     color:black
 }
+
+.btn-more{
+    margin-bottom: 50px!important;
+    margin-top: 50px!important;
+}
+
+.tag{
+    background: #111;
+    color:white;
+    border-radius: 5px;
+    padding: 5px;
+    display: inline-block;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.genre,.getpic{
+    margin-top: 10px;
+    font-size: 0.7rem;
+}
+
+.gig-parser-row{
+    border-bottom: 1px solid #eee;
+    margin-bottom: 25px;
+}
+
+.gig-genre{
+    margin-bottom: 20px;
+    font-style: italic;
+    font-size: 0.8rem;
+}
+
+.hidden{
+    display: none;
+}

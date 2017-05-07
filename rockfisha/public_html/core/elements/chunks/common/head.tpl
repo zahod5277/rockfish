@@ -9,5 +9,6 @@
     <link rel="stylesheet" href="{$_modx->config.assets_url}default/js/bx/jquery.bxslider.css"/>
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1">
     <meta charset="utf8">
+    <meta name="description" content="{$_modx->resource.description}">
     <base href="{$_modx->config.site_url}">
 </head>

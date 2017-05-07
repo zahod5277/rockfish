@@ -14,7 +14,11 @@ $date = DateTime::createFromFormat('Y-m-d h:i:s', $date);
 $date = ($date->getTimestamp());
 $publishedon = strftime('%Y-%m-%d',$date);
 $unpub_date = strftime('%Y-%m-%d',strtotime('+1 Day', $date));
-$content = str_replace(' 00:00:00', '',$gig['date']).' в клубе ' .$gig['clubname'].' состоится концерт '.$gig['title'].'. Стоимость билетов от '.$gig['price'];
+$description = str_replace(' 00:00:00', '',$gig['date']).' в клубе ' .$gig['clubname'].' состоится концерт '.$gig['title'].'. Стоимость билетов от '.$gig['price'];
+$content = $description
+        . '<p>'
+        . $gig['content']
+        . '</p>';
 
 $page = $modx->newObject('modResource');
 $alias = $page->cleanAlias($gig['title']).'-'.$publishedon;
@@ -25,6 +29,7 @@ $response = $modx->runProcessor('resource/create', array(
     'parent' => $gig['club'],
     'content' => $content,
     'unpub_date' => $unpub_date,
+    'description' => $description,
     'publishedon' => $publishedon,
     'template' => '4',
     'published' => '1',
@@ -33,10 +38,11 @@ $response = $modx->runProcessor('resource/create', array(
     'tv1' => $gig['clubname'],
     'tv4' => $date,
     'tv3' => $gig['price'],
-    'tv2' => $gig['img']
+    'tv2' => $gig['img'],
+    'tv5' => $gig['genre']
     ));
 if ($response->isError()) {
-    $res = $modx->error->failure($response->getMessage());
+    $res = 'Возникла ошибка создания ресурса';
 } else {
     $res = "Успешно создан ресурс ".$gig['title'];
 }
